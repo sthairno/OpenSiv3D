@@ -105,6 +105,7 @@ namespace s3d
 	// http://go.microsoft.com/fwlink/?LinkID=615560
 	//-------------------------------------------------------------------------------------
 
+	/*
 	bool ViewFrustum::intersects(const ViewFrustum& frustum) const noexcept
 	{
 		using namespace DirectX;
@@ -519,6 +520,7 @@ namespace s3d
 		const auto result = fr.ContainedBy(NearPlane, FarPlane, RightPlane, LeftPlane, TopPlane, BottomPlane);
 		return (result == DirectX::ContainmentType::CONTAINS);
 	}
+	*/
 
 	//-------------------------------------------------------------------------------------
 
