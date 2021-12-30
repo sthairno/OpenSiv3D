@@ -841,6 +841,22 @@
     <ClInclude Include="..\Siv3D\include\ThirdParty\lua\lualib.h" />
     <ClInclude Include="..\Siv3D\include\ThirdParty\nanoflann\nanoflann.hpp" />
     <ClInclude Include="..\Siv3D\include\ThirdParty\Obfuscate\obfuscate.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick.config.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_capi.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_common.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.freebsd.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.linux.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.macos.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.platform.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.win.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_memory.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_message.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_miniz.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_serialization.h" />
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_server.h" />
     <ClInclude Include="..\Siv3D\include\ThirdParty\parallel_hashmap\phmap.h" />
     <ClInclude Include="..\Siv3D\include\ThirdParty\parallel_hashmap\phmap_base.h" />
     <ClInclude Include="..\Siv3D\include\ThirdParty\parallel_hashmap\phmap_bits.h" />
@@ -1766,6 +1782,15 @@
     <ClInclude Include="..\Siv3D\src\ThirdParty\zstd\zstd_errors.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_capi.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_core.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.d3d12.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.vulkan.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_message.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_miniz.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_serialization.cpp" />
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_server.cpp" />
     <ClCompile Include="..\Siv3D\src\Siv3D-Platform\OpenGL4\Siv3D\ConstantBuffer\GL4\ConstantBufferDetail_GL4.cpp" />
     <ClCompile Include="..\Siv3D\src\Siv3D-Platform\OpenGL4\Siv3D\Mesh\GL4\CMesh_GL4.cpp" />
     <ClCompile Include="..\Siv3D\src\Siv3D-Platform\OpenGL4\Siv3D\Mesh\GL4\GL4Mesh.cpp" />
@@ -2862,6 +2887,9 @@
     <OutDir>..\Siv3D\lib\Windows\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\Debug\Intermediate\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

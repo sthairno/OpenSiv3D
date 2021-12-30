@@ -1570,6 +1570,9 @@
     <Filter Include="src\Siv3D\ScopedViewport3D">
       <UniqueIdentifier>{b5bd6309-08af-4d08-bde5-0497b277c275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\ThirdParty\optick">
+      <UniqueIdentifier>{910b22aa-d948-498f-a951-2b85764bca05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Siv3D\include\Siv3D.hpp">
@@ -6831,6 +6834,54 @@
     <ClInclude Include="..\Siv3D\include\Siv3D\detail\Leap.ipp">
       <Filter>include\Siv3D\detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick.config.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_capi.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_common.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.freebsd.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.linux.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.macos.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.platform.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_core.win.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_memory.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_message.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_miniz.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_serialization.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Siv3D\include\ThirdParty\optick\optick_server.h">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Siv3D\src\Siv3D\Common\Siv3DEngine.cpp">
@@ -9871,6 +9922,33 @@
     </ClCompile>
     <ClCompile Include="..\Siv3D\src\Siv3D\ScopedViewport3D\SivScopedViewport3D.cpp">
       <Filter>src\Siv3D\ScopedViewport3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_capi.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_core.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.d3d12.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_gpu.vulkan.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_message.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_miniz.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_serialization.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Siv3D\include\ThirdParty\optick\optick_server.cpp">
+      <Filter>include\ThirdParty\optick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

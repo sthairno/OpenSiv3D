@@ -23,6 +23,8 @@
 # include <Siv3D/Window/CWindow.hpp>
 # include <Siv3D/Script/IScript.hpp>
 
+# include <ThirdParty/optick/optick.h>
+
 void Main();
 
 //        [THREAD #0]                        [THREAD #1]
@@ -65,6 +67,7 @@ namespace s3d
 
 	static void PumpMessages()
 	{
+		OPTICK_EVENT();
 		for (int32 i = 0; i < 100; ++i)
 		{
 			MSG message = {};
@@ -201,6 +204,8 @@ namespace s3d
 
 	static void MainThread()
 	{
+		OPTICK_THREAD("MainThread");
+
 		Siv3DEngine engine;
 
 		std::unique_lock ul(g_mutex); // (1)--
@@ -285,6 +290,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 		::CoUninitialize();
 		::CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 	}
+
+	OPTICK_THREAD("WorkerThread");
 
 	std::unique_lock ul(g_mutex); // (0)--
 

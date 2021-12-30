@@ -55,6 +55,10 @@
 # include <Siv3D/System/SystemLog.hpp>
 # include <Siv3D/System/SystemMisc.hpp>
 # include <Siv3D/Windows/Windows.hpp>
+
+# include <ThirdParty/optick/optick.h>
+# include <ThirdParty/optick/optick_capi.h>
+
 # include "CSystem.hpp"
 
 namespace s3d
@@ -67,6 +71,7 @@ namespace s3d
 	CSystem::~CSystem()
 	{
 		LOG_SCOPED_TRACE(U"CSystem::~CSystem()");
+		OPTICK_SHUTDOWN();
 
 		SystemMisc::Destroy();
 		SystemLog::Final();
@@ -149,33 +154,46 @@ namespace s3d
 
 	bool CSystem::update()
 	{
-		if (m_termination)
 		{
-			return false;
-		}
-
-		if (m_setupState == SetupState::Initialized)
-		{
-			if (auto pWindow = static_cast<CWindow*>(Siv3DEngine::Get<ISiv3DWindow>()))
+			OPTICK_EVENT("System::Update");
+			if (m_termination)
 			{
-				pWindow->show();
+				return false;
 			}
 
-			m_setupState = SetupState::WindowDisplayed;
-		}
+			if (m_setupState == SetupState::Initialized)
+			{
+				if (auto pWindow = static_cast<CWindow*>(Siv3DEngine::Get<ISiv3DWindow>()))
+				{
+					pWindow->show();
+				}
 
-		if (SIV3D_ENGINE(UserAction)->terminationTriggered())
-		{
-			m_termination = true;
-			return false;
-		}
+				m_setupState = SetupState::WindowDisplayed;
+			}
 
-		SIV3D_ENGINE(Addon)->draw();
-		SIV3D_ENGINE(Print)->draw();
-		SIV3D_ENGINE(Renderer)->flush();
-		SIV3D_ENGINE(Profiler)->endFrame();
-		SIV3D_ENGINE(Renderer)->present();
-		SIV3D_ENGINE(ScreenCapture)->update();
+			if (SIV3D_ENGINE(UserAction)->terminationTriggered())
+			{
+				m_termination = true;
+				return false;
+			}
+
+			SIV3D_ENGINE(Addon)->draw();
+			SIV3D_ENGINE(Print)->draw();
+
+			{
+				OPTICK_EVENT("Flush", Optick::Category::Rendering);
+				SIV3D_ENGINE(Renderer)->flush();
+			}
+
+			SIV3D_ENGINE(Profiler)->endFrame();
+
+			{
+				OPTICK_EVENT("Present", Optick::Category::Wait);
+				SIV3D_ENGINE(Renderer)->present();
+			}
+
+			SIV3D_ENGINE(ScreenCapture)->update();
+		}
 
 		//
 		// previous frame
@@ -184,36 +202,42 @@ namespace s3d
 		//
 		// current frame
 		//
+		OptickAPI_NextFrame();
 
 		SIV3D_ENGINE(Profiler)->beginFrame();
-		const bool onDeviceChange = m_onDeviceChange.exchange(false);
-		if (not SIV3D_ENGINE(AssetMonitor)->update())
+
+
 		{
-			m_termination = true;
-			return false;
-		}
-		SIV3D_ENGINE(Scene)->update();
-		SIV3D_ENGINE(Window)->update();
-		SIV3D_ENGINE(Renderer)->clear();
-		SIV3D_ENGINE(Asset)->update();
-		SIV3D_ENGINE(Cursor)->update();
-		SIV3D_ENGINE(Keyboard)->update();
-		SIV3D_ENGINE(Mouse)->update();
-		SIV3D_ENGINE(XInput)->update(onDeviceChange);
-		SIV3D_ENGINE(Gamepad)->update();
-		SIV3D_ENGINE(Pentablet)->update();
-		SIV3D_ENGINE(TextInput)->update();
-		SIV3D_ENGINE(DragDrop)->update();
-		SIV3D_ENGINE(Effect)->update();
-		if (not SIV3D_ENGINE(Addon)->update())
-		{
-			m_termination = true;
-			return false;
+			OPTICK_EVENT("System::Update");
+			const bool onDeviceChange = m_onDeviceChange.exchange(false);
+			if (not SIV3D_ENGINE(AssetMonitor)->update())
+			{
+				m_termination = true;
+				return false;
+			}
+			SIV3D_ENGINE(Scene)->update();
+			SIV3D_ENGINE(Window)->update();
+			SIV3D_ENGINE(Renderer)->clear();
+			SIV3D_ENGINE(Asset)->update();
+			SIV3D_ENGINE(Cursor)->update();
+			SIV3D_ENGINE(Keyboard)->update();
+			SIV3D_ENGINE(Mouse)->update();
+			SIV3D_ENGINE(XInput)->update(onDeviceChange);
+			SIV3D_ENGINE(Gamepad)->update();
+			SIV3D_ENGINE(Pentablet)->update();
+			SIV3D_ENGINE(TextInput)->update();
+			SIV3D_ENGINE(DragDrop)->update();
+			SIV3D_ENGINE(Effect)->update();
+			if (not SIV3D_ENGINE(Addon)->update())
+			{
+				m_termination = true;
+				return false;
+			}
+
+			// triggerd by key inputs
+			SIV3D_ENGINE(LicenseManager)->update();
 		}
 
-		// triggerd by key inputs
-		SIV3D_ENGINE(LicenseManager)->update();
-	
 		return true;
 	}
 
