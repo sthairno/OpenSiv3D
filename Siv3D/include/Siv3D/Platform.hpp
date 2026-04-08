@@ -79,7 +79,7 @@
 
 # elif SIV3D_PLATFORM(LINUX)
 
-	# if (defined(__SSE4_1__) && __SSE4_1__) || (defined(__SSE4_2__) && __SSE4_2__)
+	# if defined(__SSE4_2__) && __SSE4_2__
 		# undef  SIV3D_INTRINSIC_PRIVATE_DEFINITION_SSE
 		# define SIV3D_INTRINSIC_PRIVATE_DEFINITION_SSE()	1
 	# endif
